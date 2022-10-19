@@ -13,3 +13,108 @@
     margin-left: auto;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+
+
+.activater {
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 8px;
+    border: 1px solid rgba(243, 243, 243, .4);
+   
+}
+
+/* .offcanvas-body {
+    overflow-x: hidden;
+} */
+
+.navbar-brand {
+    font-size: xx-large !important;
+
+}
+
+.navbar {
+    /* background-image: linear-gradient(to top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1) !important; */
+
+    font-family: 'Indie Flower', cursive !important;
+    box-shadow: 0 0 3px gray !important;
+    position: fixed !important;
+    top: 0 !important;
+    width: 100% !important
+
+}
+
+#offcanvasNavbar-expand-xxl.show {
+    background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1) !important;
+    font-family: 'Indie Flower', cursive !important;
+    font-size: x-large !important;
+  
+}
+#offcanvasNavbar-expand-xxl {
+    
+    font-size: x-large !important;
+  
+}
+.offcanvas-title {
+    font-size: xx-large !important;
+}
+
+.offcanvas-body>div> a {
+    opacity: 0;
+    animation: .25s ease-in-out;
+    animation-name: fade-in;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+.offcanvas-body>div> a:hover {
+    /* border-bottom: 4px solid whitesmoke !important; */
+    transform: scale(1.01) !important;
+    font-weight: bold;
+}
+
+.offcanvas-body>div> a:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: whitesmoke;
+    transition: width .15s ease-out;
+  }
+  
+  .offcanvas-body>div> a:hover::after {
+    width: 40%;
+  }
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        filter: blur(5px);
+        transform: translateX(10%)
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateX(0%)
+    }
+}
+
+.offcanvas-backdrop.show {
+    opacity: 1 !important;
+    backdrop-filter: blur(1px);
+    background-color: rgba(0, 0, 0, .5);
+    overflow-x: hidden;
+    
+}
+
+.offcanvas-header, .offcanvas-body, .btn {
+    color: whitesmoke
+}
+
+
+.navbar__link {
+    margin-right: 2rem;
+}
+
+.btn {
+    flex-grow: 0 !important;
+}

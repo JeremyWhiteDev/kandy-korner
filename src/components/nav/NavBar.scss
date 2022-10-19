@@ -1,0 +1,6 @@
+@for $i from 1 through 10 {
+    .offcanvas-body a:nth-child(#{$i}) {
+      -webkit-animation-delay:(#{$i*0.15s}); 
+      animation-delay:(#{$i*0.15s}); 
+    }
+  }
