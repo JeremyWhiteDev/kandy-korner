@@ -1,10 +1,13 @@
 import "./Products.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Products = () => {
   const [products, setProduct] = useState([]);
   const [filteredProducts, setFilter] = useState([]);
   const [priceFilter, setPriceFilter] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
