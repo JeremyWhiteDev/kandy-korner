@@ -9,7 +9,7 @@ export const Products = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `http://localhost:8088/products?_sort=name&_order=asc`
+        `http://localhost:8088/products/?_expand=productType&sort=name&_order=asc`
       );
       const data = await response.json();
       setProduct(data);
@@ -26,7 +26,7 @@ export const Products = () => {
       setFilter(filteredArray);
     } else {
       setFilter(products);
-      console.log(products + "yup");
+      console.log(products[0] + "yup");
     }
   }, [priceFilter, products]);
 
@@ -58,6 +58,7 @@ export const Products = () => {
             <section key={product.id} className="card">
               <h4>{product.name}</h4>
               <p>${product.price}</p>
+              <p>{product.productType.type}</p>
             </section>
           );
         })}
