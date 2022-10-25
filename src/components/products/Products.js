@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 export const Products = () => {
   const [products, setProduct] = useState([]);
   const [filteredProducts, setFilter] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [productLocations, setProductLocations] = useState([]);
   const [priceFilter, setPriceFilter] = useState(false);
 
   const navigate = useNavigate();
@@ -21,6 +23,24 @@ export const Products = () => {
       const data = await response.json();
       setProduct(data);
       console.log(products);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:8088/productLocations`);
+      const data = await response.json();
+      setProductLocations(data);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:8088/locations`);
+      const data = await response.json();
+      setLocations(data);
     };
     fetchData();
   }, []);
@@ -75,7 +95,15 @@ export const Products = () => {
         {filteredProducts.map((product) => {
           return (
             <>
-              <ProductCard card={product} />;
+              {products && locations && productLocations ? (
+                <ProductCard
+                  card={product}
+                  getLocations={locations}
+                  getProductLocations={productLocations}
+                />
+              ) : (
+                ""
+              )}
             </>
           );
         })}
