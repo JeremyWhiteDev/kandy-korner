@@ -1,5 +1,6 @@
 import "./Products.css";
 import { useState, useEffect } from "react";
+import { ProductCard } from "./ProductCard";
 import { useNavigate } from "react-router-dom";
 
 export const Products = () => {
@@ -8,6 +9,9 @@ export const Products = () => {
   const [priceFilter, setPriceFilter] = useState(false);
 
   const navigate = useNavigate();
+
+  const localUserData = localStorage.getItem("kandy_user");
+  const localUser = JSON.parse(localUserData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,15 +58,25 @@ export const Products = () => {
         >
           {!priceFilter ? "Filter by top Price" : "Show All"}
         </button>
+        {localUser ? (
+          <button
+            onClick={() => {
+              navigate("/add-product");
+            }}
+            className=""
+          >
+            Create new Product
+          </button>
+        ) : (
+          ""
+        )}
       </div>
       <section className="card-list">
         {filteredProducts.map((product) => {
           return (
-            <section key={product.id} className="card">
-              <h4>{product.name}</h4>
-              <p>${product.price}</p>
-              <p>{product.productType.type}</p>
-            </section>
+            <>
+              <ProductCard card={product} />;
+            </>
           );
         })}
       </section>
