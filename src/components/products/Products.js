@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const Products = () => {
   const [products, setProduct] = useState([]);
   const [filteredProducts, setFilter] = useState([]);
-  const [locations, setLocations] = useState([]);
+  //   const [locations, setLocations] = useState([]);
   const [productLocations, setProductLocations] = useState([]);
   const [priceFilter, setPriceFilter] = useState(false);
 
@@ -29,21 +29,23 @@ export const Products = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:8088/productLocations`);
+      const response = await fetch(
+        `http://localhost:8088/productLocations?_expand=product&_expand=location`
+      );
       const data = await response.json();
       setProductLocations(data);
     };
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`http://localhost:8088/locations`);
-      const data = await response.json();
-      setLocations(data);
-    };
-    fetchData();
-  }, []);
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       const response = await fetch(`http://localhost:8088/locations`);
+  //       const data = await response.json();
+  //       setLocations(data);
+  //     };
+  //     fetchData();
+  //   }, []);
 
   useEffect(() => {
     if (priceFilter === true) {
@@ -56,6 +58,16 @@ export const Products = () => {
       console.log(products[0] + "yup");
     }
   }, [priceFilter, products]);
+
+  const findProductLocationList = (product) => {
+    const filteredProductLocations = productLocations.filter(
+      (x) => x.productId === product.id
+    );
+    const currentProductLocations = filteredProductLocations.map(
+      (x) => x.location.city
+    );
+    return currentProductLocations;
+  };
 
   return (
     <>
@@ -95,11 +107,10 @@ export const Products = () => {
         {filteredProducts.map((product) => {
           return (
             <>
-              {products && locations && productLocations ? (
+              {products && productLocations ? (
                 <ProductCard
                   card={product}
-                  getLocations={locations}
-                  getProductLocations={productLocations}
+                  getProductLocations={findProductLocationList(product)}
                 />
               ) : (
                 ""
