@@ -34,24 +34,25 @@ export const NewProduct = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const formCopy = { ...formValue };
+    console.log(createArrayOfProductLocations);
+    // const formCopy = { ...formValue };
 
-    const fetchOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formCopy),
-    };
-    const response = await fetch(
-      "http://localhost:8088/products",
-      fetchOptions
-    );
-    await response.json();
+    // const fetchOptions = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(formCopy),
+    // };
+    // const response = await fetch(
+    //   "http://localhost:8088/products",
+    //   fetchOptions
+    // );
+    // await response.json();
 
-    navigate("/products");
+    // navigate("/products");
   };
 
   //handlePostTo ProductLocations
