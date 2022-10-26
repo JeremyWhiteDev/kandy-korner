@@ -50,8 +50,26 @@ export const NewProduct = () => {
       fetchOptions
     );
     await response.json();
+
     navigate("/products");
   };
+
+  //handlePostTo ProductLocations
+  //loop over the checked status array with .filter, return array of objects with locationId only. .map over that array to add current location to it.
+  //at this point, I have an array of objects to post, so do a forEach and pass in the current abject as an anonymous function.
+
+  const createArrayOfProductLocations = (currentProductId) => {
+    const ojectifiedArray = checkedStatus.map((x, index) => {
+      return {
+        isChecked: x.id,
+        productId: currentProductId,
+        locationId: locations[index].locationId,
+      };
+    });
+    return ojectifiedArray.filter((x) => x.isChecked);
+  };
+
+  //
 
   const handleChecked = (selected) => {
     const index = parseInt(selected) - 1;
@@ -128,6 +146,7 @@ export const NewProduct = () => {
             })}
           </ul>
         </fieldset>
+        <button onClick={() => handleSubmit()}>Submit me!</button>
       </form>
     </>
   );
