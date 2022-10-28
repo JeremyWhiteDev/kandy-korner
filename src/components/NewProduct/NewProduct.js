@@ -6,11 +6,11 @@ export const NewProduct = () => {
   const [productTypes, setProductTypes] = useState([]);
   const [locations, setLocations] = useState([]);
   const [checkedStatus, setCheckedStatus] = useState([]);
+  const [products, setProducts] = useState([]);
   const [formValue, updateFormValue] = useState({
     name: "",
     productTypeId: 0,
     price: "",
-    locations: [],
   });
   const navigate = useNavigate();
 
@@ -34,23 +34,51 @@ export const NewProduct = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(createArrayOfProductLocations);
-    // const formCopy = { ...formValue };
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `http://localhost:8088/products?_sort=id&_order=desc`
+      );
+      const data = await response.json();
+      setProducts(data);
+    };
+    fetchData();
+  }, []);
 
-    // const fetchOptions = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(formCopy),
-    // };
-    // const response = await fetch(
-    //   "http://localhost:8088/products",
-    //   fetchOptions
-    // );
-    // await response.json();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(createArrayOfProductLocations());
+    const formCopy = { ...formValue };
+
+    const fetchOptionsProduct = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formCopy),
+    };
+    const response = await fetch(
+      "http://localhost:8088/products",
+      fetchOptionsProduct
+    );
+    await response.json();
+
+    const productLocations = createArrayOfProductLocations();
+    for (const productLocation of productLocations) {
+      const fetchOptionsProductLocations = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productLocation),
+      };
+
+      const response = await fetch(
+        "http://localhost:8088/productLocations",
+        fetchOptionsProductLocations
+      );
+      await response.json();
+    }
 
     // navigate("/products");
   };
@@ -59,15 +87,19 @@ export const NewProduct = () => {
   //loop over the checked status array with .filter, return array of objects with locationId only. .map over that array to add current location to it.
   //at this point, I have an array of objects to post, so do a forEach and pass in the current abject as an anonymous function.
 
-  const createArrayOfProductLocations = (currentProductId) => {
-    const ojectifiedArray = checkedStatus.map((x, index) => {
-      return {
-        isChecked: x.id,
-        productId: currentProductId,
-        locationId: locations[index].locationId,
-      };
+  const createArrayOfProductLocations = () => {
+    const objectifiedArray = checkedStatus.map((x, index) => {
+      if (x) {
+        return {
+          isChecked: x,
+          productId: products[0].id + 1,
+          locationId: locations[index].id,
+        };
+      } else {
+        return false;
+      }
     });
-    return ojectifiedArray.filter((x) => x.isChecked);
+    return objectifiedArray.filter((x) => x !== false);
   };
 
   //
@@ -126,6 +158,17 @@ export const NewProduct = () => {
           </select>
         </fieldset>
         <fieldset>
+          <label htmlFor="productPrice">Product Price</label>
+          <input
+            name="productPrice"
+            onChange={(event) => {
+              const formCopy = { ...formValue };
+              formCopy.price = event.target.value;
+              updateFormValue(formCopy);
+            }}
+          />
+        </fieldset>
+        <fieldset>
           <ul>
             {locations.map((location) => {
               return (
@@ -147,7 +190,13 @@ export const NewProduct = () => {
             })}
           </ul>
         </fieldset>
-        <button onClick={() => handleSubmit()}>Submit me!</button>
+        <button
+          onClick={(eventClick) => {
+            handleSubmit(eventClick);
+          }}
+        >
+          Submit me!
+        </button>
       </form>
     </>
   );

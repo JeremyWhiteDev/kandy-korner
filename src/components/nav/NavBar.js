@@ -66,7 +66,7 @@ export const NavBar = () => {
                   <NavLink
                     to="/home"
                     className={({ isActive }) => {
-                      console.log(isActive);
+                      //   console.log(isActive);
                       return "nav-link" + (isActive ? " activater" : "");
                     }}
                   >
@@ -75,7 +75,7 @@ export const NavBar = () => {
                   <NavLink
                     to="/products"
                     className={({ isActive }) => {
-                      console.log(isActive);
+                      //   console.log(isActive);
                       return "nav-link" + (isActive ? " activater" : "");
                     }}
                   >
@@ -84,7 +84,7 @@ export const NavBar = () => {
                   <NavLink
                     to="/locations"
                     className={({ isActive }) => {
-                      console.log(isActive);
+                      //   console.log(isActive);
                       return "nav-link" + (isActive ? " activater" : "");
                     }}
                   >
@@ -93,7 +93,7 @@ export const NavBar = () => {
                   <NavLink
                     to="/about-us"
                     className={({ isActive }) => {
-                      console.log(isActive);
+                      //   console.log(isActive);
                       return "nav-link" + (isActive ? " activater" : "");
                     }}
                   >
