@@ -18,16 +18,35 @@ export const ProductCard = ({ card, getProductLocations, searchCard }) => {
         <h4>{card.name}</h4>
         <p>${card.price}</p>
         {!searchCard ? <p>Category: {card.productType.type}</p> : ""}
-        <ul>
-          Locations:
-          {getProductLocations.map((x) => {
-            return (
-              <>
-                <li>{x}</li>
-              </>
-            );
-          })}
-        </ul>
+        {!searchCard ? (
+          <ul>
+            Locations:
+            {getProductLocations.map((x) => {
+              return (
+                <>
+                  <li>{x}</li>
+                </>
+              );
+            })}
+          </ul>
+        ) : (
+          ""
+        )}
+
+        {searchCard ? (
+          <button
+            onClick={() => {
+              window.alert(
+                "This item can be purchased in the following locations: " +
+                  getProductLocations.join(", ")
+              );
+            }}
+          >
+            Show me Where to purchase!
+          </button>
+        ) : (
+          ""
+        )}
       </section>
     </>
   );
