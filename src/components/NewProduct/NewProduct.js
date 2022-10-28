@@ -80,7 +80,7 @@ export const NewProduct = () => {
       await response.json();
     }
 
-    // navigate("/products");
+    navigate("/products");
   };
 
   //handlePostTo ProductLocations
@@ -91,7 +91,6 @@ export const NewProduct = () => {
     const objectifiedArray = checkedStatus.map((x, index) => {
       if (x) {
         return {
-          isChecked: x,
           productId: products[0].id + 1,
           locationId: locations[index].id,
         };
@@ -137,7 +136,7 @@ export const NewProduct = () => {
             onChange={(event) => {
               const formCopy = { ...formValue };
 
-              formCopy.productTypeId = event.target.value;
+              formCopy.productTypeId = parseInt(event.target.value);
               updateFormValue(formCopy);
             }}
           >
@@ -163,7 +162,7 @@ export const NewProduct = () => {
             name="productPrice"
             onChange={(event) => {
               const formCopy = { ...formValue };
-              formCopy.price = event.target.value;
+              formCopy.price = parseInt(event.target.value);
               updateFormValue(formCopy);
             }}
           />

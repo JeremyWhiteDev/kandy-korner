@@ -1,4 +1,4 @@
-export const ProductCard = ({ card, getProductLocations }) => {
+export const ProductCard = ({ card, getProductLocations, searchCard }) => {
   //   console.log(taco);
   //   const foundLocations = [];
   //   const foundLocations = getProductLocations.filter(
@@ -17,7 +17,7 @@ export const ProductCard = ({ card, getProductLocations }) => {
       <section key={card.id} className="card">
         <h4>{card.name}</h4>
         <p>${card.price}</p>
-        <p>Category: {card.productType.type}</p>
+        {!searchCard ? <p>Category: {card.productType.type}</p> : ""}
         <ul>
           Locations:
           {getProductLocations.map((x) => {

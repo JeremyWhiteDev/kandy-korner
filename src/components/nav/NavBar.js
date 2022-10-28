@@ -82,6 +82,15 @@ export const NavBar = () => {
                     Products
                   </NavLink>
                   <NavLink
+                    to="/find-products"
+                    className={({ isActive }) => {
+                      //   console.log(isActive);
+                      return "nav-link" + (isActive ? " activater" : "");
+                    }}
+                  >
+                    Find Products
+                  </NavLink>
+                  <NavLink
                     to="/locations"
                     className={({ isActive }) => {
                       //   console.log(isActive);
