@@ -117,6 +117,15 @@ export const NavBar = () => {
                   >
                     Team
                   </NavLink>
+                  <NavLink
+                    to="/customers"
+                    className={({ isActive }) => {
+                      //   console.log(isActive);
+                      return "nav-link" + (isActive ? " activater" : "");
+                    }}
+                  >
+                    Customers
+                  </NavLink>
 
                   {/* <NavDropdown
                     title="Dropdown"
