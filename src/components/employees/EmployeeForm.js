@@ -57,7 +57,7 @@ export const AddEmployee = () => {
       const employeeInfoCopy = { ...employeeParam };
       employeeInfoCopy.userId = newUserId;
 
-      // Another fetchOptions for f......
+      // Another fetchOptions for employee info......
       const fetchOptionsEmployee = {
         method: "POST",
         headers: {
@@ -70,6 +70,8 @@ export const AddEmployee = () => {
         fetchOptionsEmployee
       );
     };
+
+    //call the function above with the args passed in from the top level handle submit
     postUserandEmployee(user, employee);
     navigate("/employees");
   };
