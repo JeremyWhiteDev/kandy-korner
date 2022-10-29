@@ -27,40 +27,50 @@ export const AddEmployee = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = (event, user) => {
+  const handleSubmit = (event, user, employee) => {
+    //prefent default form submit
     event.preventDefault();
-    const postUserandEmployee = async (user) => {
-      //declare fetchOptions
+    //create one function for both POST requests
+    const postUserandEmployee = async (userParam, employeeParam) => {
+      //declare fetchOptions for user Obj
       const fetchOptionsUser = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify(userParam),
       };
-      //fetch stringified entry obj
+
+      //form fields are split into two different states, the fields for user data object are handlded by userInfo state, the fields for employee data object are stored in seperate employeeInfo state...
+
+      //post first stringified user obj and store response in responseUser variable
       const responseUser = await fetch(
         `http://localhost:8088/users`,
         fetchOptionsUser
       );
-      //handle response
-      const jsonResponse = await responseUser.json();
-      const newId = jsonResponse.id;
-      const formCopy = { ...employeeInfo };
-      formCopy.userId = newId;
+
+      //make json object from response payload which contains fullName, email, and json-server created id
+      const jsonNewUserObj = await responseUser.json();
+      const newUserId = jsonNewUserObj.id;
+
+      //grab current formState for employee sections of form and update userId with newUserId from json-server
+      const employeeInfoCopy = { ...employeeParam };
+      employeeInfoCopy.userId = newUserId;
+
+      // Another fetchOptions for f......
       const fetchOptionsEmployee = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formCopy),
+        body: JSON.stringify(employeeInfoCopy),
       };
       const responseEmployee = await fetch(
         `http://localhost:8088/employees`,
         fetchOptionsEmployee
       );
     };
-    postUserandEmployee(user);
+    postUserandEmployee(user, employee);
     navigate("/employees");
   };
 
@@ -147,7 +157,7 @@ export const AddEmployee = () => {
 
         <button
           onClick={(eventClick) => {
-            handleSubmit(eventClick, userInfo);
+            handleSubmit(eventClick, userInfo, employeeInfo);
           }}
         >
           Submit me!
