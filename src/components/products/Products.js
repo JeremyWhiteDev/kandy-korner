@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { ProductCard } from "./ProductCard";
 import { useNavigate } from "react-router-dom";
 
-export const Products = () => {
+export const Products = ({ searchGetter, searchCard }) => {
   const [products, setProduct] = useState([]);
   const [filteredProducts, setFilter] = useState([]);
   //   const [locations, setLocations] = useState([]);
@@ -59,6 +59,14 @@ export const Products = () => {
     }
   }, [priceFilter, products]);
 
+  useEffect(() => {
+    const searchedProducts = products.filter((product) => {
+      return product.name.toLowerCase().startsWith(searchGetter.toLowerCase());
+    });
+
+    setFilter(searchedProducts);
+  }, [searchGetter]);
+
   const findProductLocationList = (product) => {
     const filteredProductLocations = productLocations.filter(
       (x) => x.productId === product.id
@@ -111,6 +119,8 @@ export const Products = () => {
                 <ProductCard
                   card={product}
                   getProductLocations={findProductLocationList(product)}
+                  key={`product--${product.id}`}
+                  searchCard={searchCard}
                 />
               ) : (
                 ""
