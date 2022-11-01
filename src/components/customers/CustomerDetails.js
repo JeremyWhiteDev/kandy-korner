@@ -35,7 +35,14 @@ export const CustomerDetails = () => {
       );
       //handle response
     };
-    postData(customer);
+    const customerCopy = {
+      address: customer.address,
+      phoneNumber: customer.phoneNumber,
+      userId: customer.userId,
+      loyalty: customer.loyalty,
+    };
+
+    postData(customerCopy);
   };
 
   return (
@@ -44,6 +51,8 @@ export const CustomerDetails = () => {
       <p>Address: {customer?.address}</p>
       <p>Phone Number: {customer?.phoneNumber}</p>
       <p>Email: {customer.user?.email}</p>
+
+      {}
       <form>
         <fieldset>
           <label htmlFor="loyaltyNumber">Loyalty Number</label>
@@ -55,7 +64,7 @@ export const CustomerDetails = () => {
             value={customer.loyalty}
             onChange={(evt) => {
               const formCopy = { ...customer };
-              formCopy.loyalty = evt.target.value;
+              formCopy.loyalty = evt.target.valueAsNumber;
               setCustomer(formCopy);
             }}
           />
