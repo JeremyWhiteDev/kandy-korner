@@ -17,24 +17,8 @@ export const CustomerDetails = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = (click) => {
+  const handleSubmit = async (click) => {
     click.preventDefault();
-    const postData = async (data) => {
-      //declare fetchOptions
-      const fetchOptions = {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      };
-      //fetch stringified entry obj
-      const response = await fetch(
-        `http://localhost:8088/customers/${customerId}`,
-        fetchOptions
-      );
-      //handle response
-    };
     const customerCopy = {
       address: customer.address,
       phoneNumber: customer.phoneNumber,
@@ -42,7 +26,17 @@ export const CustomerDetails = () => {
       loyalty: customer.loyalty,
     };
 
-    postData(customerCopy);
+    //fetch stringified entry obj
+    const response = await fetch(
+      `http://localhost:8088/customers/${customerId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(customerCopy),
+      }
+    );
   };
 
   return (
