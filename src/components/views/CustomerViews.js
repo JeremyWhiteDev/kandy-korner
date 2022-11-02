@@ -9,6 +9,7 @@ import { EmployeeList } from "../employees/EmployeeList";
 import { AddEmployee } from "../employees/EmployeeForm";
 import { CustomerList } from "../customers/CustomerList";
 import { CustomerDetails } from "../customers/CustomerDetails";
+import { Cart } from "../order/Cart";
 
 export const CustomerViews = () => {
   return (
@@ -16,14 +17,11 @@ export const CustomerViews = () => {
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/add-product" element={<NewProduct />} />
         <Route path="/find-products" element={<FindProducts />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/employees" element={<EmployeeList />} />
-        <Route path="/add-employee" element={<AddEmployee />} />
-        <Route path="/customers" element={<CustomerList />} />
-        <Route path="/customer/:customerId" element={<CustomerDetails />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </>
   );

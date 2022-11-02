@@ -15,6 +15,42 @@ import "./NavBar.scss";
 // define logic to find active link and change styling/addClassName
 export const CustomerNavBar = () => {
   const navigate = useNavigate();
+  const [customers, setCustomers] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [filteredCart, setFilteredCart] = useState([]);
+
+  const localUserData = localStorage.getItem("kandy_user");
+  const localUser = JSON.parse(localUserData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:8088/customers`);
+      const data = await response.json();
+      setCustomers(data);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:8088/shoppingCartItems`);
+      const data = await response.json();
+      setCart(data);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (customers && cart) {
+      const foundCustomer = customers.find(
+        (customer) => customer.userId === localUser.id
+      );
+      const filteredArray = cart.filter(
+        (item) => item.customerId === foundCustomer.id
+      );
+      setFilteredCart(filteredArray);
+    }
+  }, [cart]);
 
   const [currentView, setCurrentView] = useState();
 
@@ -106,7 +142,8 @@ export const CustomerNavBar = () => {
                       return "nav-link" + (isActive ? " activater" : "");
                     }}
                   >
-                    Cart
+                    Cart{" "}
+                    <span>{filteredCart.length ? filteredCart.length : 0}</span>
                   </NavLink>
                   {/* <NavDropdown
                     title="Dropdown"
