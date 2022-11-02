@@ -143,7 +143,9 @@ export const CustomerNavBar = () => {
                     }}
                   >
                     Cart{" "}
-                    <span>{filteredCart.length ? filteredCart.length : 0}</span>
+                    <span className="cart-badge">
+                      {filteredCart.length ? filteredCart.length : 0}
+                    </span>
                   </NavLink>
                   {/* <NavDropdown
                     title="Dropdown"
