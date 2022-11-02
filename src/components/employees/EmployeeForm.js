@@ -12,6 +12,7 @@ export const AddEmployee = () => {
   const [userInfo, updateUserInfo] = useState({
     fullName: "",
     email: "",
+    isStaff: true,
   });
 
   const [locations, setLocations] = useState([]);
