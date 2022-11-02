@@ -31,7 +31,6 @@ export const AddEmployee = () => {
     //prefent default form submit
     event.preventDefault();
     //create one function for both POST requests
-    //declare fetchOptions for user Obj
 
     //form fields are split into two different states, the fields for user data object are handlded by userInfo state, the fields for employee data object are stored in seperate employeeInfo state...
 
