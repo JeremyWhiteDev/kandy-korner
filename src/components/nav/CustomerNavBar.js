@@ -15,42 +15,22 @@ import "./NavBar.scss";
 // define logic to find active link and change styling/addClassName
 export const CustomerNavBar = () => {
   const navigate = useNavigate();
-  const [customers, setCustomers] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [filteredCart, setFilteredCart] = useState([]);
+  const [customer, setCustomer] = useState({});
 
   const localUserData = localStorage.getItem("kandy_user");
   const localUser = JSON.parse(localUserData);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:8088/customers`);
-      const data = await response.json();
-      setCustomers(data);
+      const customerResponse = await fetch(
+        `http://localhost:8088/customers?_expand=user&_embed=shoppingCartItems&userId=${localUser.id}`
+      );
+      const customerData = await customerResponse.json();
+      const singleCustomer = customerData[0];
+      setCustomer(singleCustomer);
     };
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`http://localhost:8088/shoppingCartItems`);
-      const data = await response.json();
-      setCart(data);
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (customers && cart) {
-      const foundCustomer = customers.find(
-        (customer) => customer.userId === localUser.id
-      );
-      const filteredArray = cart.filter(
-        (item) => item.customerId === foundCustomer.id
-      );
-      setFilteredCart(filteredArray);
-    }
-  }, [cart]);
 
   const [currentView, setCurrentView] = useState();
 
@@ -144,7 +124,9 @@ export const CustomerNavBar = () => {
                   >
                     Cart{" "}
                     <span className="cart-badge">
-                      {filteredCart.length ? filteredCart.length : 0}
+                      {customer.shoppingCartItems?.length
+                        ? customer.shoppingCartItems.length
+                        : 0}
                     </span>
                   </NavLink>
                   {/* <NavDropdown
