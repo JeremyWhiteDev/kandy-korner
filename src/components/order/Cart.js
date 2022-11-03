@@ -9,21 +9,24 @@ export const Cart = () => {
   const localUserData = localStorage.getItem("kandy_user");
   const localUser = JSON.parse(localUserData);
 
+  const getAllCustomersCarts = async () => {
+    const customerResponse = await fetch(
+      `http://localhost:8088/customers?_expand=user&_embed=shoppingCartItems&userId=${localUser.id}`
+    );
+    const customerData = await customerResponse.json();
+    const singleCustomer = customerData[0];
+    setCustomer(singleCustomer);
+    setCurrentCart(singleCustomer.shoppingCartItems);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
-      const customerResponse = await fetch(
-        `http://localhost:8088/customers?_expand=user&_embed=shoppingCartItems&userId=${localUser.id}`
-      );
-      const customerData = await customerResponse.json();
-      const singleCustomer = customerData[0];
-
       const productResponse = await fetch(`http://localhost:8088/products`);
       const productData = await productResponse.json();
 
-      setCustomer(singleCustomer);
-      setCurrentCart(singleCustomer.shoppingCartItems);
       setProducts(productData);
     };
+    getAllCustomersCarts();
     fetchData();
   }, []);
 
@@ -61,8 +64,10 @@ export const Cart = () => {
             <CartItem
               key={`cartItemProduct--${key}`}
               productId={parseInt(key)}
-              numberOfItems={value.length}
+              arrOfItems={value}
               allProducts={products}
+              getAllCustomersCarts={getAllCustomersCarts}
+              currentCustomerId={customer.id}
             />
           );
         })}
