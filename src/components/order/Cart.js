@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { CartItem } from "./CartItem.js";
 
 export const Cart = () => {
   const [customer, setCustomer] = useState({});
   const [currentCart, setCurrentCart] = useState([]);
+  const [reducedCart, setReducedCart] = useState([]);
   const [products, setProducts] = useState([]);
   const localUserData = localStorage.getItem("kandy_user");
   const localUser = JSON.parse(localUserData);
@@ -25,7 +27,19 @@ export const Cart = () => {
     fetchData();
   }, []);
 
-  //change shopping cart array and transform into reduced array, use reduced array to display each product component by looping through reduced array and referencing product Ids,
+  //change shopping cart array and transform into reduced array, use reduced array to display each product component by looping through reduced array and referencing product Ids of reduced array to build out product cards. include button for editing number of products. figure out how to delete an unspecified id?
+
+  useEffect(() => {
+    const reducedArray = currentCart.reduce((groupedItems, item) => {
+      const product = item.productId;
+      if (groupedItems[product] == null) {
+        groupedItems[product] = [];
+      }
+      groupedItems[product].push(item);
+      return groupedItems;
+    }, {});
+    setReducedCart(reducedArray);
+  }, [currentCart]);
 
   return (
     <>
@@ -42,20 +56,15 @@ export const Cart = () => {
       </div>
 
       <section className="card-list">
-        {currentCart.map((cartItem) => {
-          return null;
-          // <>
-          //   {products ? (
-          //     <ProductCard
-          //       cart={cartItem}
-          //       productDetails={findProductLocationList(product)}
-          //       key={`product--${product.id}`}
-          //       searchCard={searchCard}
-          //     />
-          //   ) : (
-          //     ""
-          //   )}
-          // </>
+        {Object.entries(reducedCart).map(([key, value]) => {
+          return (
+            <CartItem
+              key={`cartItemProduct--${key}`}
+              productId={parseInt(key)}
+              numberOfItems={value.length}
+              allProducts={products}
+            />
+          );
         })}
       </section>
     </>
