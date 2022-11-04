@@ -57,20 +57,27 @@ export const Cart = () => {
         </div>
         <p className="emoji">🛒</p>
       </div>
+      {currentCart.length ? (
+        <section className="card-list">
+          {Object.entries(reducedCart).map(([key, value]) => {
+            return (
+              <CartItem
+                key={`cartItemProduct--${key}`}
+                productId={parseInt(key)}
+                cartItemsArr={value}
+                allProducts={products}
+                getAllCustomersCarts={getAllCustomersCarts}
+                currentCustomerId={customer.id}
+              />
+            );
+          })}
+        </section>
+      ) : (
+        <section className="section-info">Empty Cart</section>
+      )}
 
-      <section className="card-list">
-        {Object.entries(reducedCart).map(([key, value]) => {
-          return (
-            <CartItem
-              key={`cartItemProduct--${key}`}
-              productId={parseInt(key)}
-              arrOfItems={value}
-              allProducts={products}
-              getAllCustomersCarts={getAllCustomersCarts}
-              currentCustomerId={customer.id}
-            />
-          );
-        })}
+      <section className="checkout">
+        <button disabled={!currentCart.length}>Proceed to Checkout</button>
       </section>
     </>
   );

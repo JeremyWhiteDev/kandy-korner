@@ -25,6 +25,9 @@ code {
       height: 350px;
   }
   
+  .section-title {
+    text-align: center;
+  }
   
   
   .emoji {

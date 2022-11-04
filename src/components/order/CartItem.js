@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CustomerContext } from "../KandyKorner";
 
 export const CartItem = ({
   productId,
-  arrOfItems,
+  cartItemsArr,
   allProducts,
   getAllCustomersCarts,
   currentCustomerId,
@@ -12,8 +13,10 @@ export const CartItem = ({
   const foundProduct = allProducts.find((product) => product.id === productId);
   //   console.log(foundProduct);
 
+  const [customer, getGlobalCustomer] = useContext(CustomerContext);
+
   useEffect(() => {
-    setCartQuantity(arrOfItems.length);
+    setCartQuantity(cartItemsArr.length);
   }, []);
 
   const handleDecrement = async (click) => {
@@ -26,13 +29,14 @@ export const CartItem = ({
       };
       //fetch stringified entry obj
       const response = await fetch(
-        `http://localhost:8088/shoppingCartItems/${arrOfItems[0].id}`,
+        `http://localhost:8088/shoppingCartItems/${cartItemsArr[0].id}`,
         { method: "DELETE" }
       );
       //handle response
     };
     await deleteData();
     getAllCustomersCarts();
+    getGlobalCustomer();
   };
   const handleIncrement = async (click) => {
     click.preventDefault();
@@ -58,6 +62,20 @@ export const CartItem = ({
     };
     await postData(productCopy);
     getAllCustomersCarts();
+    getGlobalCustomer();
+  };
+
+  const handleRemoveAll = async (click) => {
+    click.preventDefault();
+    for (const item of cartItemsArr) {
+      const response = await fetch(
+        `http://localhost:8088/shoppingCartItems/${item.id}`,
+        { method: "DELETE" }
+      );
+      await response.json();
+    }
+    getAllCustomersCarts();
+    getGlobalCustomer();
   };
 
   return (
@@ -70,6 +88,7 @@ export const CartItem = ({
           {cartQuantity}{" "}
           <button onClick={(click) => handleIncrement(click)}>+</button>
         </p>
+        <button onClick={(click) => handleRemoveAll(click)}>Remove All</button>
       </section>
     </>
   );

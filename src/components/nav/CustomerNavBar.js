@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Container,
   Navbar,
@@ -11,26 +11,16 @@ import {
 } from "react-bootstrap";
 import "./NavBar.css";
 import "./NavBar.scss";
+import { CustomerContext } from "../KandyKorner";
 
 // define logic to find active link and change styling/addClassName
 export const CustomerNavBar = () => {
   const navigate = useNavigate();
-  const [customer, setCustomer] = useState({});
+
+  const [customer, getGlobalCustomer] = useContext(CustomerContext);
 
   const localUserData = localStorage.getItem("kandy_user");
   const localUser = JSON.parse(localUserData);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const customerResponse = await fetch(
-        `http://localhost:8088/customers?_expand=user&_embed=shoppingCartItems&userId=${localUser.id}`
-      );
-      const customerData = await customerResponse.json();
-      const singleCustomer = customerData[0];
-      setCustomer(singleCustomer);
-    };
-    fetchData();
-  }, []);
 
   const [currentView, setCurrentView] = useState();
 
