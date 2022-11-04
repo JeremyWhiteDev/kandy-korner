@@ -97,7 +97,7 @@ export const Products = ({ searchGetter, searchCard }) => {
         >
           {!priceFilter ? "Filter by top Price" : "Show All"}
         </button>
-        {localUser ? (
+        {localUser.staff ? (
           <button
             onClick={() => {
               navigate("/add-product");
