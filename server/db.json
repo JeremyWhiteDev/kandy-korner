@@ -1,0 +1,418 @@
+{
+  "customers": [
+    {
+      "address": "35838 Pagac Street North Lourdes",
+      "phoneNumber": 820495408,
+      "userId": 1,
+      "loyalty": 11004,
+      "id": 1
+    },
+    {
+      "id": 2,
+      "address": "0213 Estell Island",
+      "phoneNumber": 5804383687,
+      "userId": 2,
+      "loyalty": 10002
+    },
+    {
+      "id": 3,
+      "address": "491 Pollich Heights",
+      "phoneNumber": 9685754220,
+      "userId": 3,
+      "loyalty": 10004
+    },
+    {
+      "id": 4,
+      "address": "47270 Botsford Fort",
+      "phoneNumber": 2053748752,
+      "userId": 4,
+      "loyalty": 10004
+    },
+    {
+      "id": 5,
+      "address": "35070 Zackery Run",
+      "phoneNumber": 7867930454,
+      "userId": 5,
+      "loyalty": 10004
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "userId": 101,
+      "startDate": "5/8/2017",
+      "payRate": 15,
+      "locationId": 1
+    },
+    {
+      "id": 2,
+      "userId": 102,
+      "startDate": "6/13/2021",
+      "payRate": 18,
+      "locationId": 1
+    },
+    {
+      "id": 3,
+      "userId": 103,
+      "startDate": "11/29/2016",
+      "payRate": 12,
+      "locationId": 2
+    },
+    {
+      "id": 4,
+      "userId": 104,
+      "startDate": "4/8/2017",
+      "payRate": 13,
+      "locationId": 3
+    },
+    {
+      "id": 5,
+      "userId": 105,
+      "startDate": "8/23/2004",
+      "payRate": 16,
+      "locationId": 3
+    },
+    {
+      "locationId": 4,
+      "startDate": "2022-11-18",
+      "payRate": 34,
+      "userId": 106,
+      "id": 6
+    },
+    {
+      "locationId": 4,
+      "startDate": "2022-10-11",
+      "payRate": 234,
+      "userId": 107,
+      "id": 7
+    },
+    {
+      "locationId": 2,
+      "startDate": "2022-10-20",
+      "payRate": 45,
+      "userId": 108,
+      "id": 8
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "fullName": "Cary Effertz",
+      "email": "ceffertz@me.com",
+      "isStaff": false
+    },
+    {
+      "id": 2,
+      "fullName": "Maybell Quitzon",
+      "email": "mquitz@me.com",
+      "isStaff": false
+    },
+    {
+      "id": 3,
+      "fullName": "Mona Ankunding",
+      "email": "mank@me.com",
+      "isStaff": false
+    },
+    {
+      "id": 4,
+      "fullName": "Lula Abshire",
+      "email": "labshire@me.com",
+      "isStaff": false
+    },
+    {
+      "id": 5,
+      "fullName": "Keven Rutherford",
+      "email": "kruthe@me.com",
+      "isStaff": false
+    },
+    {
+      "id": 101,
+      "fullName": "Keshawn Quitzon",
+      "email": "keshQuitz@me.com",
+      "isStaff": true
+    },
+    {
+      "id": 102,
+      "fullName": "Mose Dooley",
+      "email": "Mosedooley@me.com",
+      "isStaff": true
+    },
+    {
+      "id": 103,
+      "fullName": "Cloyd Kunze",
+      "email": "CloydK@me.com",
+      "isStaff": true
+    },
+    {
+      "id": 104,
+      "fullName": "Kayli Mills",
+      "email": "KMills@me.com",
+      "isStaff": true
+    },
+    {
+      "id": 105,
+      "fullName": "Cullen Bashirian",
+      "email": "CBash@me.com",
+      "isStaff": true
+    },
+    {
+      "fullName": "Casey",
+      "email": "cj.com",
+      "isStaff": true,
+      "id": 106
+    },
+    {
+      "fullName": "asdf",
+      "email": "43",
+      "isStaff": true,
+      "id": 107
+    },
+    {
+      "fullName": "sdf",
+      "email": "345324",
+      "isStaff": true,
+      "id": 108
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "productTypeId": 1,
+      "name": "A small pet tiger. Kid friendly",
+      "price": 700
+    },
+    {
+      "id": 2,
+      "productTypeId": 2,
+      "name": "Kandy's Chocolate Brick",
+      "price": 10
+    },
+    {
+      "id": 3,
+      "productTypeId": 2,
+      "name": "Kandy's Chocolate Slab",
+      "price": 12
+    },
+    {
+      "id": 4,
+      "productTypeId": 3,
+      "name": "Kandy's Facebreaker",
+      "price": 5
+    },
+    {
+      "id": 5,
+      "productTypeId": 3,
+      "name": "Kandy's SourPunch",
+      "price": 7
+    },
+    {
+      "name": "Gummies",
+      "productTypeId": 2,
+      "price": 5,
+      "id": 6
+    },
+    {
+      "name": "Gummies",
+      "productTypeId": 2,
+      "price": 5,
+      "id": 7
+    },
+    {
+      "name": "asdf",
+      "productTypeId": 1,
+      "price": 345,
+      "id": 8
+    },
+    {
+      "name": "frt",
+      "productTypeId": 2,
+      "price": 45,
+      "id": 9
+    }
+  ],
+  "productTypes": [
+    {
+      "id": 1,
+      "type": "Black Market"
+    },
+    {
+      "id": 2,
+      "type": "Candy Bar"
+    },
+    {
+      "id": 3,
+      "type": "Hard Candy"
+    }
+  ],
+  "locations": [
+    {
+      "id": 1,
+      "address": "4120 N Mt Juliet Rd, Mt. Juliet, TN 37122",
+      "city": "Mt. Juliet",
+      "squareFootage": 4050
+    },
+    {
+      "id": 2,
+      "address": "40 Hickory Ridge Ln, Hartsville, TN 37074",
+      "city": "Hartsville",
+      "squareFootage": 2560
+    },
+    {
+      "id": 3,
+      "address": "2011 Nashville Pike, Gallatin, TN 37066",
+      "city": "Gallatin",
+      "squareFootage": 2500
+    },
+    {
+      "id": 4,
+      "address": "5544 Old Hickory Blvd, Hermitage, TN 37076",
+      "city": "Hermitage",
+      "squareFootage": 1560
+    },
+    {
+      "id": 5,
+      "address": "4400 Lebanon Pike, Nolensville, TN 37076",
+      "city": "Nolensville",
+      "squareFootage": 3230
+    }
+  ],
+  "productLocations": [
+    {
+      "id": 1,
+      "productId": 1,
+      "locationId": 1
+    },
+    {
+      "id": 2,
+      "productId": 1,
+      "locationId": 3
+    },
+    {
+      "id": 3,
+      "productId": 2,
+      "locationId": 2
+    },
+    {
+      "id": 4,
+      "productId": 3,
+      "locationId": 1
+    },
+    {
+      "id": 5,
+      "productId": 3,
+      "locationId": 2
+    },
+    {
+      "id": 6,
+      "productId": 3,
+      "locationId": 3
+    },
+    {
+      "id": 7,
+      "productId": 3,
+      "locationId": 4
+    },
+    {
+      "id": 8,
+      "productId": 4,
+      "locationId": 2
+    },
+    {
+      "id": 9,
+      "productId": 4,
+      "locationId": 3
+    },
+    {
+      "id": 10,
+      "productId": 5,
+      "locationId": 5
+    },
+    {
+      "productId": 8,
+      "locationId": 3,
+      "id": 13
+    },
+    {
+      "productId": 9,
+      "locationId": 2,
+      "id": 14
+    }
+  ],
+  "shoppingCartItems": [
+    {
+      "customerId": 4,
+      "productId": 2,
+      "id": 2
+    },
+    {
+      "customerId": 4,
+      "productId": 3,
+      "id": 3
+    },
+    {
+      "customerId": 4,
+      "productId": 2,
+      "id": 4
+    },
+    {
+      "customerId": 4,
+      "productId": 2,
+      "id": 5
+    },
+    {
+      "customerId": 4,
+      "productId": 2,
+      "id": 6
+    },
+    {
+      "customerId": 1,
+      "productId": 2,
+      "id": 9
+    },
+    {
+      "customerId": 1,
+      "productId": 2,
+      "id": 10
+    },
+    {
+      "customerId": 1,
+      "productId": 1,
+      "id": 12
+    },
+    {
+      "customerId": 1,
+      "productId": 1,
+      "id": 13
+    },
+    {
+      "customerId": 1,
+      "productId": 1,
+      "id": 14
+    },
+    {
+      "customerId": 1,
+      "productId": 1,
+      "id": 15
+    },
+    {
+      "customerId": 1,
+      "productId": 1,
+      "id": 16
+    },
+    {
+      "customerId": 1,
+      "productId": 1,
+      "id": 17
+    },
+    {
+      "customerId": 1,
+      "productId": 3,
+      "id": 19
+    },
+    {
+      "customerId": 1,
+      "productId": 3,
+      "id": 20
+    }
+  ]
+}
