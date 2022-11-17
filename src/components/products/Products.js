@@ -55,7 +55,6 @@ export const Products = ({ searchGetter, searchCard }) => {
       setFilter(filteredArray);
     } else {
       setFilter(products);
-      console.log(products[0] + "yup");
     }
   }, [priceFilter, products]);
 
@@ -98,7 +97,7 @@ export const Products = ({ searchGetter, searchCard }) => {
         >
           {!priceFilter ? "Filter by top Price" : "Show All"}
         </button>
-        {localUser ? (
+        {localUser.staff ? (
           <button
             onClick={() => {
               navigate("/add-product");
@@ -121,6 +120,7 @@ export const Products = ({ searchGetter, searchCard }) => {
                   getProductLocations={findProductLocationList(product)}
                   key={`product--${product.id}`}
                   searchCard={searchCard}
+                  user={localUser}
                 />
               ) : (
                 ""

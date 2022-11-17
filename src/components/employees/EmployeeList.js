@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "../Modal/Modal";
 
 export const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [modalIsActive, setModalIsActive] = useState(false);
   const navigate = useNavigate();
+
+  const localUserData = localStorage.getItem("kandy_user");
+  const localUser = JSON.parse(localUserData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +44,11 @@ export const EmployeeList = () => {
       </div>
 
       <div>
-        <button onClick={() => navigate("/add-employee")}>Add Empoyee</button>
+        {localUser.staff ? (
+          <button onClick={() => setModalIsActive(true)}>Add Empoyee</button>
+        ) : (
+          ""
+        )}
       </div>
       <section className="card-list">
         {employees.map((employee) => {
@@ -52,6 +61,7 @@ export const EmployeeList = () => {
           );
         })}
       </section>
+      <Modal isActive={modalIsActive} setModalIsActive={setModalIsActive} />
     </>
   );
 };

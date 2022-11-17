@@ -18,10 +18,10 @@
 
 
 .activater {
-    background-color: rgba(255, 255, 255, .1);
+    background-color: rgba(0, 0, 0, 0.15);
     border-radius: 8px;
-    border: 1px solid rgba(243, 243, 243, .4);
-   
+    /* border: 1px solid rgba(243, 243, 243, .4); */
+    box-shadow: inset 0 0 10px rgb(0, 0, 0);
 }
 
 /* .offcanvas-body {
@@ -117,4 +117,11 @@
 
 .btn {
     flex-grow: 0 !important;
+}
+
+.cart-badge {
+    background-color: rebeccapurple;
+    padding: 0 12px;
+    border-radius: 12px;
+    font-weight: bold;
 }

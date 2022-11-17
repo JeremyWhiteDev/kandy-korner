@@ -47,36 +47,26 @@ export const NewProduct = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(createArrayOfProductLocations());
     const formCopy = { ...formValue };
 
-    const fetchOptionsProduct = {
+    const response = await fetch("http://localhost:8088/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formCopy),
-    };
-    const response = await fetch(
-      "http://localhost:8088/products",
-      fetchOptionsProduct
-    );
+    });
     await response.json();
 
     const productLocations = createArrayOfProductLocations();
     for (const productLocation of productLocations) {
-      const fetchOptionsProductLocations = {
+      const response = await fetch("http://localhost:8088/productLocations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(productLocation),
-      };
-
-      const response = await fetch(
-        "http://localhost:8088/productLocations",
-        fetchOptionsProductLocations
-      );
+      });
       await response.json();
     }
 

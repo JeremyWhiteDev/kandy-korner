@@ -12,6 +12,7 @@ export const AddEmployee = () => {
   const [userInfo, updateUserInfo] = useState({
     fullName: "",
     email: "",
+    isStaff: true,
   });
 
   const [locations, setLocations] = useState([]);
@@ -27,52 +28,40 @@ export const AddEmployee = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = (event, user, employee) => {
+  const handleSubmit = async (event) => {
     //prefent default form submit
     event.preventDefault();
     //create one function for both POST requests
-    const postUserandEmployee = async (userParam, employeeParam) => {
-      //declare fetchOptions for user Obj
-      const fetchOptionsUser = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userParam),
-      };
 
-      //form fields are split into two different states, the fields for user data object are handlded by userInfo state, the fields for employee data object are stored in seperate employeeInfo state...
+    //form fields are split into two different states, the fields for user data object are handlded by userInfo state, the fields for employee data object are stored in seperate employeeInfo state...
 
-      //post first stringified user obj and store response in responseUser variable
-      const responseUser = await fetch(
-        `http://localhost:8088/users`,
-        fetchOptionsUser
-      );
+    //post first stringified user obj and store response in responseUser variable
+    const responseUser = await fetch(`http://localhost:8088/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userInfo),
+    });
 
-      //make json object from response payload which contains fullName, email, and json-server created id
-      const jsonNewUserObj = await responseUser.json();
-      const newUserId = jsonNewUserObj.id;
+    //make json object from response payload which contains fullName, email, and json-server created id
+    const jsonNewUserObj = await responseUser.json();
+    const newUserId = jsonNewUserObj.id;
 
-      //grab current formState for employee sections of form and update userId with newUserId from json-server
-      const employeeInfoCopy = { ...employeeParam };
-      employeeInfoCopy.userId = newUserId;
+    //grab current formState for employee sections of form and update userId with newUserId from json-server
+    const employeeInfoCopy = { ...employeeInfo };
+    employeeInfoCopy.userId = newUserId;
 
-      // Another fetchOptions for employee info......
-      const fetchOptionsEmployee = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(employeeInfoCopy),
-      };
-      const responseEmployee = await fetch(
-        `http://localhost:8088/employees`,
-        fetchOptionsEmployee
-      );
-    };
+    // Another fetchOptions for employee info......
 
-    //call the function above with the args passed in from the top level handle submit
-    postUserandEmployee(user, employee);
+    const responseEmployee = await fetch(`http://localhost:8088/employees`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(employeeInfoCopy),
+    });
+
     navigate("/employees");
   };
 
@@ -159,7 +148,7 @@ export const AddEmployee = () => {
 
         <button
           onClick={(eventClick) => {
-            handleSubmit(eventClick, userInfo, employeeInfo);
+            handleSubmit(eventClick);
           }}
         >
           Submit me!
